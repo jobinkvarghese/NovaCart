@@ -1,0 +1,8 @@
+{% extends 'website/layout.html'%}
+{% block banner %}
+   {% include 'website/content_split/user_account_content.html'%}
+{% endblock %}
+{% block extra_scripts %}
+{% load static %}
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}

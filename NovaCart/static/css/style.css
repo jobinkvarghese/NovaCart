@@ -499,3 +499,15 @@ form a{
         display: none;
     }
 }
+
+.cart-checkout-btn{
+
+    color: white;
+    background-color: #ff523b;
+    padding: 15px;
+    font-weight: 400;
+    float: right;
+    border-radius: 5px;
+    margin-top: 8px;
+    cursor: pointer;
+}
