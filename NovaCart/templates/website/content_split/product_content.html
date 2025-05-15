@@ -13,16 +13,29 @@
                 <a href="{% url 'product_details'%}"><img src="{{data.image.url}}"></a>
                 <h4>{{data.title}}</h4>
                 <p>{{data.price}}</p>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
             </div>
             {% endfor %}
         </div>
         {% endfor %}
+        
       
         <div class="page-btn">
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>&#8594;</span>
+            {% if items.has_previous %}
+        <a href="?page={{items.previous_page_number}}"><span>PREV</span></a>
+        {% endif %}
+            {% for i in items.paginator.page_range%}
+            <a href="?page={{i}}"><span>{{i}}</span></a>
+            {% endfor %}
+            {% if items.has_next %}
+        <a href="?page={{items.next_page_number}}"><span>NEXT</span></a>
+        {% endif %}
+            
         </div>
     </div>
