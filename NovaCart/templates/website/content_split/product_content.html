@@ -10,7 +10,7 @@
         <div class="row">
             {% for data in product %}
             <div class="col-4">
-                <a href="{% url 'product_details'%}"><img src="{{data.image.url}}"></a>
+                <a href="{% url 'product_details' data.id %}"><img src="{{data.image.url}}"></a>
                 <h4>{{data.title}}</h4>
                 <p>{{data.price}}</p>
                 <div class="rating">

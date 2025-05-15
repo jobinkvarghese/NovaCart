@@ -24,8 +24,15 @@
                     <ul id="MenuItems">
                         <li><a href="{% url 'home' %}">Home</a></li>
                         <li><a href="{% url 'product' %}">Products</a></li>
-                        <li><a href="{% url 'user_account' %}">Account</a></li>
+                        
                         <li><a href="{% url 'home' %}">Orders</a></li>
+                       
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'user_account' %}">Account</a></li>
+                        {% endif %}
+
                     </ul>
                 </nav>
                 <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
