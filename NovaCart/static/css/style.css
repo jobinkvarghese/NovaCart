@@ -67,6 +67,21 @@ p{
     margin: 30px 0;
     border-radius: 30px;
     transition: background 0.5s;
+    cursor: pointer;
+
+}
+.btnn{
+    display: inline-block;
+    background: #ff523b;
+    color: white;
+    padding: 8px 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    transition: background 0.5s;
+    cursor: pointer;
+}
+.btnn:hover{
+    background: #563434;
 }
 .btn:hover{
     background: #563434;
@@ -351,9 +366,10 @@ td{
     padding: 10px 5px;
 }
 td input{
-    width: 40px;
+    width: 50px;
+    text-align: center;
     height: 30px;
-    padding: 5px;
+    padding: 8px;
 }
 td a{
     color: #ff523b;
@@ -418,7 +434,7 @@ form input{
     width: 100%;
     height: 30px;
     margin: 10px 0;
-    padding: 0 10px;
+    padding: 0 2px;
     border: 1px solid #ccc;
 }
 form textarea{
@@ -532,3 +548,4 @@ form a{
     padding: 10px;
     margin: 5px 0;
   }
+ 

@@ -1,0 +1,39 @@
+{% load static %}
+{% load get_status %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+ <!-- Cart items details -->
+    <div class="small-container cart-page">
+        {% if messages %}
+        {% for msg in messages %}
+        <li class={{msg.tags}}> {{msg}}</li>
+        {% endfor %}
+        {%endif %}
+        <table>
+            <tr>
+                <th>ORDER ID</th>
+                <th>DATE</th>
+                <th>TOTAL AMOUNT</th>
+                <th>ORDER STATUS</th>
+            </tr>
+            {% for item in order%}
+         
+            <tr>
+                <td>
+                    {% comment %} <div class="cart-info">
+                        <img src="{{ordered_items.product.image.url}}">
+                        <div> {% endcomment %}
+                            <p>{{forloop.counter}}</p>
+               
+                </td>
+                <td><p>{{ item.created_at}}</p></td>
+                <td><p>{{item.grand_total}}</p></td>
+                <td><p>{% status item.order_status%}</p></td>
+                
+            </tr>
+            {% endfor%}
+        </table>
+    
+
+    </div>
+   
+

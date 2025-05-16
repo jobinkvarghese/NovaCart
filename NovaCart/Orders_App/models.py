@@ -23,17 +23,20 @@ class Order(models.Model):
     )
 
     owner=models.ForeignKey(Customer,related_name="orders",on_delete=models.SET_NULL,null=True)
+    grand_total=models.FloatField(default=0.0)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     delete_status=models.IntegerField(choices=DELETE_CHOICES,default=LIVE)
     order_status=models.IntegerField(choices=STATUS_CHOICES,default=CART_STAGE)
 
     def __str__(self):
-        return self.owner
-    
+        return self.owner.name
+
+   
 class OrderedItem(models.Model):
     product=models.ForeignKey(Product,related_name="added_products",on_delete=models.SET_NULL,null=True)
     quantity=models.IntegerField(default=1)
+    size=models.CharField(max_length=100,default="undefined")
     owner=models.ForeignKey(Order,related_name="added_items",on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)

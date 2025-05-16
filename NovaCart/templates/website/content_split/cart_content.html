@@ -1,75 +1,59 @@
 {% load static %}
+{% load multiply %}
+{% load grandtotal %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
  <!-- Cart items details -->
     <div class="small-container cart-page">
+        {% if messages %}
+        {% for msg in messages %}
+        <li class={{msg.tags}}> {{msg}}</li>
+        {% endfor %}
+        {%endif %}
+    {% if cart  and cart.added_items.all%}
         <table>
             <tr>
                 <th>Product</th>
+                <th>Size</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
+            {% for ordered_items in cart.added_items.all%}
+         
             <tr>
                 <td>
                     <div class="cart-info">
-                        <img src="{% static 'images/buy-1.jpg' %}">
+                        <img src="{{ordered_items.product.image.url}}">
                         <div>
-                            <p>Red Printed T-Shirt</p>
-                            <small>Price: $50.00</small>
+                            <p>{{ordered_items.product.title}}</p>
+                            <small>Rs.{{ordered_items.product.price}}</small>
                             <br>
-                            <a href="">Remove</a>
+                            <a href="{% url 'remove_cart_item' ordered_items.id %}">Remove</a>
                         </div>
                     </div>
                 </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
+                <td><input type="text" disabled value={{ordered_items.size}}></td>
+                <td><input type="number" disabled value="{{ordered_items.quantity}}"></td>
+                <td>Rs.{% mul ordered_items.quantity ordered_items.product.price%}</td>
             </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="{% static 'images/buy-2.jpg' %}">
-                        <div>
-                            <p>Red Printed T-Shirt</p>
-                            <small>Price: $50.00</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="{% static 'images/buy-3.jpg' %}">
-                        <div>
-                            <p>Red Printed T-Shirt</p>
-                            <small>Price: $50.00</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
-            </tr>
+            {% endfor%}
         </table>
+
         <div class="total-price">
             <table>
                 <tr>
-                    <td>Subtotal</td>
-                    <td>$200.00</td>
-                </tr>
-                <tr>
-                    <td>Tax</td>
-                    <td>$35.00</td>
-                </tr>
-                <tr>
-                    <td>Total</td>
-                    <td>$230.00</td>
+                    <td>Grand Total</td>
+                    <td>{% grand cart %}</td>
                 </tr>
             </table>
         </div>
-        <a href="#"><button class="cart-checkout-btn" >Checkout</button></a>
+        <form method="post" action="{% url 'checkout'%}" enctype="multipart.form-data">
+            {% csrf_token%}
+            <input type="hidden" name="grand_total" value="{% grand cart %}">
+           <button type="submit" class="cart-checkout-btn" >Checkout</button>
+        </form>
+    {% else%}
+         <p> Cart is Empty </p>
+    {% endif %}
     </div>
+   
 
